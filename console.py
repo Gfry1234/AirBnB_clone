@@ -1,4 +1,4 @@
-#!/usr/bin/python3`
+#!/usr/bin/python3
 """
 The console v: 0.0.1
 Contains the entry point of the command interpreter
@@ -112,9 +112,10 @@ class HBNBCommand(cmd.Cmd):
             Example: 'create User'
 
         """
-    if (self.my_errors(line, 1) == 1):
+        if (self.my_errors(line, 1) == 1):
             return
         args = line.split(" ")
+
         """
         args[0] contains class name, create new instance
         of that class updates 'updated_at' attribute,
@@ -163,7 +164,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, line):
         """Shows all instances, or instances of a certain class
 
-        Args: 
+        Args:
             line(args): enter with command (optional): <class name>
             Example: 'all' OR 'all User'
 
@@ -242,11 +243,13 @@ class HBNBCommand(cmd.Cmd):
         """
         names = ["BaseModel", "User", "State", "City", "Amenity",
                  "Place", "Review"]
+
         commands = {"all": self.do_all,
                     "count": self.my_count,
                     "show": self.do_show,
                     "destroy": self.do_destroy,
-                   "update": self.do_update}
+                    "update": self.do_update}
+
         args = re.match(r"^(\w+)\.(\w+)\((.*)\)", line)
         if args:
             args = args.groups()
@@ -254,7 +257,8 @@ class HBNBCommand(cmd.Cmd):
                 or args[1] not in commands.keys():
             super().default(line)
         return
-    if args[1] in ["all", "count"]:
+
+        if args[1] in ["all", "count"]:
             commands[args[1]](args[0])
         elif args[1] in ["show", "destroy"]:
             commands[args[1]](args[0] + ' ' + args[2])
@@ -269,6 +273,8 @@ class HBNBCommand(cmd.Cmd):
                 rest = params.groups()[1].split(", ")
                 commands[args[1]](args[0] + " " + params.groups()[0] + " " +
                                   rest[0] + " " + rest[1])
+
+
 if __name__ == '__main__':
     cli = HBNBCommand()
     cli.cmdloop()
